@@ -153,11 +153,13 @@ pub fn default() -> Keymaps {
         //
         key!('r') => commands::replace,
 
+        key!('^') => commands::move_line_start,
         KeyEvent {
             code: KeyCode::Home,
             modifiers: KeyModifiers::NONE
         } => commands::move_line_start,
 
+        key!('$') => commands::move_line_end,
         KeyEvent {
             code: KeyCode::End,
             modifiers: KeyModifiers::NONE
@@ -316,10 +318,12 @@ pub fn default() -> Keymaps {
 
             key!('T') => commands::extend_till_prev_char,
             key!('F') => commands::extend_prev_char,
+            key!('^') => commands::extend_line_start,
             KeyEvent {
                 code: KeyCode::Home,
                 modifiers: KeyModifiers::NONE
             } => commands::extend_line_start,
+            key!('$') => commands::extend_line_end,
             KeyEvent {
                 code: KeyCode::End,
                 modifiers: KeyModifiers::NONE
