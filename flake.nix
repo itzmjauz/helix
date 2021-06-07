@@ -26,11 +26,14 @@
         packages.helix = naerskLib.buildPackage {
           pname = "helix";
           root = ./.;
-          src = pkgs.fetchgit {
-            url = "https://github.com/helix-editor/helix"; # could probably pass a local git repo here
+          src = pkgs.fetchFromGitHub {
+            owner = "helix-editor";
+            repo = "helix";
             fetchSubmodules = true;
-            rev = "68affa3c598723a8b9451ef3dcceda83ae161e39";
-            sha256 = "sha256-6RF1GmqDNqEeiPnFDErkNc0+gPTg3KJp8JfCD1FoUCI=";
+            rev = "9821beb5c4b36f7c34ae6a5cb014b3eb68b9233a"; 
+            # ^ ideally tag a version here e.g. v0.0.10
+            # the required commit d5de91... isn't part of a release yet
+            sha256 = "sha256-TvCZcEYm9xRNaDuQM4DT9zJg70rCT77U5LsEnhwxvA4=";
           };
         };
         defaultPackage = packages.helix;
