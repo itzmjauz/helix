@@ -3115,6 +3115,20 @@ fn match_brackets(cx: &mut Context) {
     }
 }
 
+//extend to the matching bracket
+fn match_brackets_extend(cx: &mut Context) {
+    let (view, doc) = current!(cx.editor);
+
+    if let Some(syntax) = doc.syntax() {
+        let pos = doc.selection(view.id).cursor();
+        let text = doc.text().slice(..);
+        if let Some(pos) = match_brackets::find(syntax, doc.text(), pos) {
+            let selection = object::expand_selection(syntax, text, doc.selection(view.id));
+            doc.set_selection(view.id, selection);
+        };
+    }
+}
+
 //
 
 fn jump_forward(cx: &mut Context) {
@@ -3330,6 +3344,7 @@ fn match_mode(cx: &mut Context) {
             cx.count = count;
             match ch {
                 'm' => match_brackets(cx),
+                'M' => match_brackets_extend(cx),
                 's' => surround_add(cx),
                 'r' => surround_replace(cx),
                 'd' => {
